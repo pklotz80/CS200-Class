@@ -2,15 +2,7 @@
 #include <string>
 using namespace std;
 
-// A person struct - by making a struct, we can then
-// declare a variable whose data-type is Person.
-// The Person data-type contains two internal variables:
-// name, a string	&	home, a string pointer
-struct Person
-{
-	string name;
-	string* home;
-};
+
 
 struct Location
 {
@@ -18,6 +10,17 @@ struct Location
 	string state;
 	int zip;
 };
+
+// A person struct - by making a struct, we can then
+// declare a variable whose data-type is Person.
+// The Person data-type contains two internal variables:
+// name, a string	&	home, a string pointer
+struct Person
+{
+	string name;
+	Location* home;
+};
+
 
 void SetupLocations(Location* locationList);
 void SetupPeople(Person* personList, int personCount, Location* locationList, int locationCount);
@@ -42,7 +45,7 @@ int main()
 		// the pointer to get its value, otherwise it will just
 		// give you a memory address.
 
-		cout << personList[p].name << "\t" << *personList[p].home << endl;
+		cout << personList[p].name << "\t" << personList[p].home->city << "   " << personList[p].home-> state << "   " << personList[p].home->zip << endl;
 	}
 
 
@@ -50,6 +53,7 @@ int main()
 	delete[] locationList;
 	delete[] personList;
 
+	while (true) {}
 	return 0;
 }
 
@@ -90,8 +94,7 @@ void SetupPeople(Person* personList, int personCount, Location* locationList, in
 		int index;
 		cin >> index;
 
-		personList[p].home = &locationList[index].city;
-		personList[p].home = &locationList[index].state;
-		
+		personList[p].home = &locationList[index];
+
 	}
 }
