@@ -13,7 +13,7 @@ using namespace std;
 * */
 void Program::Setup()
 {
-	
+
 	locationList = new Location[6];
 
 	locationList[0].name = "Candy Room";
@@ -77,7 +77,7 @@ void Program::Main()
 			cout << endl << "GOOD BYE!" << endl;
 		}
 
-		
+
 
 		string input = GetUserInput();
 
@@ -122,7 +122,7 @@ void Program::DisplayCurrentLocation()
 
 	if (ptrCurrentLocation->ptrToNorth != nullptr)
 	{
-		cout << "You may travel: " << "*north" << endl;	
+		cout << "You may travel: " << "*north" << endl;
 	}
 	if (ptrCurrentLocation->ptrToSouth != nullptr)
 	{
