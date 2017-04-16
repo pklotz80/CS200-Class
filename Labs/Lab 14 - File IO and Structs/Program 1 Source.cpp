@@ -12,7 +12,7 @@ struct Option
 struct Poll
 {
 	string question;
-	Option options[4];
+	Option options[5];
 };
 
 int main()
@@ -33,28 +33,30 @@ int main()
 	myPoll.options[3].title = "Sushi";
 	myPoll.options[3].count = 0;
 
-	
+	myPoll.options[4].title = "Quit";
+
 	int selection = 0;
-	int i;
-	while (selection!=4)
+	bool done = false;
+	while (!done)
 	{
 		cout << myPoll.question;
-		for (int c = 0; c < 4; c++)
+		cout << endl;
+		for (int c = 0; c < 5; c++)
 		{
 			cout << c << "." << myPoll.options[c].title << endl;
 		}
-		
+
 		cout << endl;
 		cout << "What is your selection?" << endl;
-		cout << ">>";
-		cin >> i;
-		
-		for (i = 0; i < 4; i++)
+		cout << ">> ";
+		cin >> selection;
+
+		for (selection; selection < 5; selection++)
 		{
-			myPoll.options[i];
+				myPoll.options[selection];
 		}
-		
 	}
+
 
 	ofstream output;
 	output.open("results.txt");
