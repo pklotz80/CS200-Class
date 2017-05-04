@@ -242,6 +242,23 @@ void Program::RoundPause()
 */
 void Program::LoadLocations()
 {
+	ifstream input;
+	input.open("locations.txt");
+
+	string name;
+	int ammo, food;
+	int i = 0;
+
+	while (i < m_locationCount)
+	{
+		input >> name;
+		input >> ammo;
+		input >> food;
+		Setup();
+		i++;
+	}
+
+	input.close();
 }
 
 //! Load a list of names from the names.txt file and randomly assign names to the team.
@@ -261,6 +278,21 @@ void Program::LoadLocations()
 */
 void Program::LoadPeople()
 {
+	string names[207];
+
+	int i = 0;
+	ifstream input("names.txt");
+
+	while (input >> names[i])
+	{
+		input >> names[i];
+		i++;
+	}
+
+	input.close();
+
+	Setup();
+
 }
 
 //! Ask the user how many locations and team members are available, and allocate memory for the dynamic arrays.
@@ -278,4 +310,27 @@ void Program::LoadPeople()
 */
 void Program::SetupDynamicArrays()
 {
+	int locations, members;
+	
+	cout << "How many locations are available? ";
+	cin >> locations;
+
+	while (locations < 10 && locations > 0)
+	{
+		for (locations = 0; locations < 10; locations++)
+		{
+			m_locationList[locations];
+		}
+	}
+
+	cout << "How man team members are available? ";
+	cin >> members;
+
+	while (members > 0)
+	{
+		for (members = 0; members > 0; members++)
+		{
+			m_team[members];
+		}
+	}
 }
