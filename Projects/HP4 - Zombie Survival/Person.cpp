@@ -38,7 +38,7 @@ void Person::Update()
 {
 	if (m_health > 0)
 	{
-		m_hunger += 1 + rand() % 10;
+		m_hunger += rand() % (11 - 1) + 1;
 		
 		if (m_hunger > 100)
 		{
@@ -52,7 +52,7 @@ void Person::Update()
 			}
 		}
 	}
-	else
+	if (m_hunger > 100)
 	{
 		m_hunger = 100;
 	}
@@ -67,13 +67,15 @@ void Person::Update()
 */
 void Person::DisplayStats()
 {
-	cout << m_name << endl;
-	cout << m_health << endl;
-	cout << m_hunger << endl;
+	cout << "TEAM STATS" << endl;
+	cout << endl;
+	cout << "Team member's name: " << GetName() << endl;
+	cout << "Team member's health: " << m_health << endl;
+	cout << "Team member's hunger: " << GetHunger() << endl;
 	
-	if (IsDead() == true)
+	if (IsDead())
 	{
-		cout << IsDead() << " is dead." << endl;
+		cout << GetName() << " is dead." << endl;
 	}
 	
 }
@@ -124,16 +126,16 @@ void Person::Hurt( int amount )
 {
 	if (m_health <= 0)
 	{
-		cout << m_name << " is already dead!" << endl;
+		cout << GetName() << " is already dead!" << endl;
 	}
-	else
+	if (m_health > 0)
 	{
 		m_health -= amount;
-		cout << m_health;
+		cout << "Amount of damage: " << m_health << endl;;
 		if (m_health <= 0)
 		{
 			m_health = 0;
-			cout << "This person has died!" << endl;
+			cout << GetName() << " has died!" << endl;
 		}
 	}
 }
@@ -156,9 +158,9 @@ int Person::GetHunger()
 
     @param amount <int>     The amount of food this person is eating.
 */
-void Person::Eat( int amount )
+void Person::Eat(int amount)
 {
-	cout << "This person is eating " << amount << " units of food";
+	cout << "This person is eating " << amount << " units of food" << endl;;
 	amount -= m_hunger;
 
 	if (m_hunger < 0)
