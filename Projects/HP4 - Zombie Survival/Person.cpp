@@ -2,19 +2,21 @@
 
 #include <iostream>
 #include <iomanip>
+#include <string>
+#include <cstdlib>
 using namespace std;
 
-//! Initializes health to 0 and hunger to 100, and sets the private member variable m_name to the name parameter passed in.
+//! Initializes health to 100 and hunger to 0, and sets the private member variable m_name to the name parameter passed in.
 /**
-    Initialize hunger to 0 and hunger to 100. Set the person's name to whatever the parameter passed in is.
+    Initialize hunger to 0 and health to 100. Set the person's name to whatever the parameter passed in is.
 
     @param name <const string&>     The value to assign to the m_name variable
     @return <void>
 */
 void Person::Setup(const string& name )
 {
-	m_health = 100;
 	m_hunger = 0;
+	m_health = 100;
 
 	m_name = name;
 }
@@ -67,15 +69,11 @@ void Person::Update()
 */
 void Person::DisplayStats()
 {
-	cout << "TEAM STATS" << endl;
-	cout << endl;
-	cout << "Team member's name: " << GetName() << endl;
-	cout << "Team member's health: " << m_health << endl;
-	cout << "Team member's hunger: " << GetHunger() << endl;
-	
-	if (IsDead())
+	cout << GetName() << ":     " << "Health: " << m_health << "%" << "     Hunger: " << GetHunger() << "%" << endl;
+
+	if (IsDead() == true)
 	{
-		cout << GetName() << " is dead." << endl;
+		cout << "dead" << endl;
 	}
 	
 }
@@ -89,13 +87,15 @@ void Person::DisplayStats()
 */
 bool Person::IsDead()
 {
-	if (m_health > 0)
+	bool dead = true;
+	
+	if (m_health <= 0)
 	{
-		return false;
+		return true;
 	}
 	else
 	{
-		return true;
+		return false;
 	}
 }
 
@@ -160,8 +160,9 @@ int Person::GetHunger()
 */
 void Person::Eat(int amount)
 {
-	cout << "This person is eating " << amount << " units of food" << endl;;
-	amount -= m_hunger;
+	cout << GetName() << " is eating " << amount << " units of food" << endl;;
+	
+	m_hunger -= amount;
 
 	if (m_hunger < 0)
 	{

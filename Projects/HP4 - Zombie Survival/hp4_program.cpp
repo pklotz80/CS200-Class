@@ -110,7 +110,7 @@ void Program::DisplayWeekStats()
 	cout << "Week: " << m_week << endl;
 	cout << endl;
 	cout << "BASE STATS" << endl;
-	cout << "Base Ammo: " << m_base.GetAmmo() << " unit(s)" << "          " << "Base Food: " << m_base.GetFood() << " units" << endl;
+	cout << "Base Ammo: " << m_base.GetAmmo() << " unit(s)" << "          " << "Base Food: " << m_base.GetFood() << " unit(s)" << endl;
 	cout << endl;
 	
 }
@@ -125,7 +125,10 @@ void Program::DisplayWeekStats()
 */
 void Program::UpdateTeam()
 {
-	for (int i = 0; i < 15; i++)
+	cout << "TEAM STATS" << endl;
+	cout << endl;
+
+	for (int i = 0; i >= 0; i++)
 	{
 		m_team[i].Update();
 		m_team[i].GetHunger();
@@ -149,15 +152,15 @@ void Program::UpdateTeam()
 */
 void Program::ScavengePhase()
 {
-	int choice;
+	int choice1, choice2, choice3;
 	
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 10; i++)
 	{
-		cout << i << "." << m_locationList->GetName() << endl;
+		cout << i << "." << m_locationList << endl;
 	}
 	cout << endl;
-	cout << "Which location do you want to scavenge at? ";
-	cin >> choice;
+	cout << "Which 3 locations do you want to scavenge at? ";
+	cin >> choice1, choice2, choice3;
 
 
 }
@@ -183,12 +186,11 @@ void Program::ScavengePhase()
 */
 void Program::ZombiePhase()
 {
-	int randNum = rand() % 4;
+	int randNum = rand() % (4 - 1);
 	int randAmount = rand() % (4 - 1) + 1;
 	int randDamage = rand() % (21 - 10) + 10;
 	int randName = rand() % 207;
 	double zombieHealth = 0;
-	Person person;
 
 	randNum;
 
@@ -204,10 +206,10 @@ void Program::ZombiePhase()
 			cout << "The base is out of ammo!" << endl;
 			ammoAmount -= zombieHealth;
 			ammoAmount = 0;
-			person.GetName();
+			m_team->GetName();
 
 			cout << "The zombie is attacking: " << randName << endl;
-			person.Hurt(randDamage);
+			m_team->Hurt(randDamage);
 		}
 
 		else
@@ -230,10 +232,10 @@ void Program::ZombiePhase()
 */
 bool Program::IsEveryoneDead()
 {
-	Person person;
+	
 	bool dead = true;
 
-	if (person.IsDead() == true)
+	if (m_team->IsDead())
 	{
 		return true;
 	}
@@ -318,7 +320,7 @@ void Program::LoadLocations()
 void Program::LoadPeople()
 {
 	string names[207];
-	int randNum = rand() % 14;
+	int randNum = rand() % (208 - 1);
 	
 	
 	int i = 0;
@@ -332,13 +334,10 @@ void Program::LoadPeople()
 
 	input.close();
 
-	for (int t = 0; t > m_teamCount; t++)
+	for (int t = 0; t < m_teamCount; t++)
 	{
 		m_team[t].Setup(names[randNum]);
 	}
-	
-
-	
 	
 }
 
@@ -361,7 +360,7 @@ void Program::SetupDynamicArrays()
 	
 	cout << "How many locations are available? (max 10) ";
 	cin >> locations;
-	cout << "How man team members are available? ";
+	cout << "How many team members are available? ";
 	cin >> members;
 	cout << endl;
 
